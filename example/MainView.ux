@@ -1,0 +1,6 @@
+<App>
+	<JavaScript>
+		var device = require('Bolav/Device');
+		console.log(device.persistid);
+	</JavaScript>
+</App>
