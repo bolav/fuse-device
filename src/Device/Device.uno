@@ -4,6 +4,7 @@ using Fuse.Scripting;
 using Uno.Compiler.ExportTargetInterop;
 namespace Bolav {
 
+	[ForeignInclude(Language.Java, "android.provider.Settings.Secure")]
 	[UXGlobalModule]
 	public class Device : NativeModule 
 	{
@@ -26,6 +27,13 @@ namespace Bolav {
 			UIDevice *device = [UIDevice currentDevice];
 
 			return [[device identifierForVendor]UUIDString];
+		@}
+
+		[Foreign(Language.Java)]
+		extern(android) static string GetId()
+		@{
+			String deviceId = Secure.getString(com.fuse.Activity.getRootActivity().getContentResolver(),Secure.ANDROID_ID);
+			return deviceId;
 		@}
 
 		[Foreign(Language.ObjC)]
